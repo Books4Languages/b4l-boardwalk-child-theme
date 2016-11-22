@@ -17,4 +17,4 @@
 /*remove from entry title date */
 .entry-date.published{display:none;}
 /*to change post title color*/
-.entry-title a{color:#000;}
+.entry-header.entry-title a{color:#000;}
