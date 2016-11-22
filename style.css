@@ -14,5 +14,7 @@
 @import url("../boardwalk/style.css");
 
 
-/*entry title date's*/
+/*remove from entry title date */
 .entry-date.published{display:none;}
+/*to change post title color*/
+.entry-title a{color:#000;}
