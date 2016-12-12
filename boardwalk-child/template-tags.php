@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package Boardwalk
+ * @package Boardwalk Child
  */
 
 if ( ! function_exists( 'boardwalk_paging_nav' ) ) :
@@ -63,6 +63,7 @@ function boardwalk_post_nav() {
 }
 endif;
 
+
 if ( ! function_exists( 'boardwalk_entry_meta' ) ) :
 /**
  * Prints HTML with meta information for the date.
@@ -87,13 +88,9 @@ function boardwalk_entry_meta() {
 	} else {
 		$posted_on = '<a href="' . esc_url( boardwalk_get_link_url() ) . '" rel="bookmark">' . $time_string . '</a>';
 	}
-
-	echo '<span class="posted-on">' . $posted_on . '</span>';
-
-	/*======================== 
-	*  move from entry footer
-	*========================*/	
-
+	/*========================================
+	*			move from entry footer
+	*========================================*/
 	/* Hide category and tag text for pages */
 	if ( 'post' == get_post_type() ) {
 		if ( has_post_format() ) {
@@ -103,41 +100,40 @@ function boardwalk_entry_meta() {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( __( ', ', 'boardwalk' ) );
 		if ( $categories_list && boardwalk_categorized_blog() ) {
-			printf( '<span class="cat-links">' . __( '%1$s', 'boardwalk' ) . '</span>', $categories_list );
+			printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'boardwalk' ) . '</span>', $categories_list );
 		}
-
 		/* translators: used between list items, there is a space after the comma */
 		$tags_list = get_the_tag_list( '', __( ', ', 'boardwalk' ) );
 		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . __( '%1$s', 'boardwalk' ) . '</span>', $tags_list );
+			printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'boardwalk' ) . '</span>', $tags_list );
 		}
+	}
+	/*========================================
+	*			end
+	*========================================*/
 
-}
-
-	/*======================== 
-	*  			END
-	*========================*/	
+	echo '<span class="posted-on">' . $posted_on . '</span>';
 	
 }
 endif;
+
 
 if ( ! function_exists( 'boardwalk_entry_footer' ) ) :
 /**
  * Prints HTML with meta information for the categories, tags, comments and edit link.
  */
 function boardwalk_entry_footer() {
+   /*========================================
+	*			move to entry meta
+	*========================================*/
 	/* Hide category and tag text for pages */
 	if ( 'post' == get_post_type() ) {
 		if ( has_post_format() ) {
 			$format = get_post_format();
 			echo '<span class="post-format-link"><a class="format-' . $format . '" href="' . esc_url( get_post_format_link( $format ) ) . '" title="' . esc_attr( sprintf( __( 'All %s posts', 'boardwalk' ), get_post_format_string( $format ) ) ) . '">' . get_post_format_string( $format ) . '</a></span>';
 		}
-	/*======================== 
-	*    move to entry meta 
-	*========================*/	
-
 		/* translators: used between list items, there is a space after the comma */
-	/*	$categories_list = get_the_category_list( __( ', ', 'boardwalk' ) );
+/*		$categories_list = get_the_category_list( __( ', ', 'boardwalk' ) );
 		if ( $categories_list && boardwalk_categorized_blog() ) {
 			printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'boardwalk' ) . '</span>', $categories_list );
 		}
@@ -147,17 +143,15 @@ function boardwalk_entry_footer() {
 		if ( $tags_list ) {
 			printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'boardwalk' ) . '</span>', $tags_list );
 		}
-
+*/	
 		if ( 1 != get_theme_mod( 'boardwalk_author_bio' ) ) {
 			$byline = sprintf( '<span class="byline">' . _x( 'By %s', 'post author', 'boardwalk' ) . '</span>', '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>' );
 			echo $byline;
 		}
-		*/
-}
-	/*======================== 
-	*    		END
-	*========================*/	
-
+	}
+	/*========================================
+	*			end
+	*========================================*/
 
 	if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) {
 		echo '<span class="comments-link">';
@@ -168,7 +162,6 @@ function boardwalk_entry_footer() {
 	edit_post_link( __( 'Edit', 'boardwalk' ), '<span class="edit-link">', '</span>' );
 }
 endif;
-
 if ( ! function_exists( 'the_archive_title' ) ) :
 /**
  * Shim for `the_archive_title()`.
@@ -301,3 +294,5 @@ function boardwalk_category_transient_flusher() {
 }
 add_action( 'edit_category', 'boardwalk_category_transient_flusher' );
 add_action( 'save_post',     'boardwalk_category_transient_flusher' );
+
+?>
