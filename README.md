@@ -1,3 +1,5 @@
+https://www.smashingmagazine.com/2011/11/improve-wordpress-plugins-readme-txt/
+
 # b4l-boardwalk-child-theme
 A child theme for Boardwalk Automattic catalog theme
 
